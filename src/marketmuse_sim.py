@@ -45,7 +45,35 @@ INFLUENCERS = [
    "aud": {"13-17":0.25, "18-24":0.55, "25-34":0.14, "35+":0.06},
    "geo": {"US": 0.38, "CA": 0.20, "UK": 0.24, "AU": 0.10, "other": 0.08},
    "safety": "clean", "history": {"reel":0.15,"static":0.07,"story":0.11,"avg_views":6900},
-   "fraud_indicators": {"spike_frequency": 0.01, "bot_ratio": 0.03, "repetitive_comments": 0.02}}
+   "fraud_indicators": {"spike_frequency": 0.01, "bot_ratio": 0.03, "repetitive_comments": 0.02}},
+
+  {"id": 7, "name": "HolisticBeautyDoc", "handle": "@holisticbeautydoc", "platform": "instagram",
+   "followers": 92000, "er": 0.039, "topics": ["holistic-beauty","dermatology","natural-skincare","wellness"],
+   "aud": {"13-17":0.10, "18-24":0.45, "25-34":0.35, "35+":0.10},
+   "geo": {"US": 0.48, "CA": 0.15, "UK": 0.22, "AU": 0.08, "other": 0.07},
+   "safety": "clean", "history": {"reel":0.11,"static":0.04,"story":0.08,"avg_views":8800},
+   "fraud_indicators": {"spike_frequency": 0.02, "bot_ratio": 0.04, "repetitive_comments": 0.02}},
+
+  {"id": 8, "name": "OrganicGlowGuru", "handle": "@organicglowguru", "platform": "instagram",
+   "followers": 38000, "er": 0.058, "topics": ["organic-beauty","vegan","clean-beauty","mindful-skincare"],
+   "aud": {"13-17":0.20, "18-24":0.58, "25-34":0.16, "35+":0.06},
+   "geo": {"US": 0.40, "CA": 0.18, "UK": 0.25, "AU": 0.12, "other": 0.05},
+   "safety": "clean", "history": {"reel":0.14,"static":0.06,"story":0.10,"avg_views":5900},
+   "fraud_indicators": {"spike_frequency": 0.01, "bot_ratio": 0.03, "repetitive_comments": 0.02}},
+
+  {"id": 9, "name": "SkinScientist", "handle": "@skinscientist", "platform": "instagram",
+   "followers": 150000, "er": 0.035, "topics": ["skincare-science","clinical-research","evidence-based"],
+   "aud": {"13-17":0.05, "18-24":0.35, "25-34":0.45, "35+":0.15},
+   "geo": {"US": 0.52, "CA": 0.12, "UK": 0.20, "AU": 0.08, "other": 0.08},
+   "safety": "clean", "history": {"reel":0.09,"static":0.04,"story":0.07,"avg_views":11000},
+   "fraud_indicators": {"spike_frequency": 0.02, "bot_ratio": 0.04, "repetitive_comments": 0.03}},
+
+  {"id": 10, "name": "ZeroWasteBeauty", "handle": "@zerowaste.beauty", "platform": "instagram",
+   "followers": 29000, "er": 0.067, "topics": ["zero-waste","sustainable","eco-packaging","natural-beauty"],
+   "aud": {"13-17":0.22, "18-24":0.60, "25-34":0.13, "35+":0.05},
+   "geo": {"US": 0.35, "CA": 0.25, "UK": 0.20, "AU": 0.15, "other": 0.05},
+   "safety": "clean", "history": {"reel":0.16,"static":0.07,"story":0.12,"avg_views":4800},
+   "fraud_indicators": {"spike_frequency": 0.01, "bot_ratio": 0.02, "repetitive_comments": 0.01}}
 ]
 
 # Campaign benchmarks for different verticals and seasons
