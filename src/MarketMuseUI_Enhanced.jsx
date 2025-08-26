@@ -1,5 +1,6 @@
 // MarketMuseUI.jsx - Enhanced Multi-Agent Marketing Intelligence Interface
 import React, { useState } from "react";
+import { marketingPrompts } from "./prompts/marketingPrompts";
 
 export default function MarketMuseApp(){
   const [query, setQuery] = useState("Identify the optimal influencers and predict campaign outcomes for launching a new sustainable skincare brand targeting Gen Z audiences");
@@ -132,6 +133,32 @@ export default function MarketMuseApp(){
         <div style={{backgroundColor: 'white', borderRadius: '8px', border: '1px solid #e5e7eb', padding: '24px', marginBottom: '24px'}}>
           <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
             <div style={{flex: 1}}>
+              <div style={{marginBottom: '16px'}}>
+                <label style={{display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '8px'}}>Select Campaign Template</label>
+                <select
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    backgroundColor: 'white',
+                    fontSize: '14px'
+                  }}
+                  onChange={(e) => {
+                    const selectedPrompt = marketingPrompts.find(p => p.id === parseInt(e.target.value));
+                    if (selectedPrompt) {
+                      setQuery(selectedPrompt.prompt);
+                    }
+                  }}
+                >
+                  <option value="">Select a campaign template...</option>
+                  {marketingPrompts.map(prompt => (
+                    <option key={prompt.id} value={prompt.id}>
+                      {prompt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <label style={{display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '8px'}}>Campaign Brief</label>
               <textarea
                 style={{
