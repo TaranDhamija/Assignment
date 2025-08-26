@@ -3,72 +3,107 @@
 import json
 from datetime import datetime
 
+# Agent System Prompts - Written by seasoned marketing professionals
+SYSTEM_PROMPTS = {
+    "evaluator": """Look, I'll be straight with you - after running influencer campaigns for Sephora and working with hundreds of beauty creators, I've learned to spot the real deal from the wannabes.
+
+Trust me, it's not about the follower count (that number can be as fake as some before/after pics 😅). Here's what I actually look at:
+
+* Comments that go beyond "😍😍😍" - are people asking questions? Sharing experiences?
+* Stories and random posts - that's where you see their real personality
+* Engagement patterns - I can spot bought followers from a mile away (seen it too many times!)
+* How they handle sponsored content - the good ones make it feel natural
+
+BTW, don't get me started on those "100% organic growth" claims - let's get real and find creators who actually connect with their audience.""",
+    
+    "predictor": """Okay, real talk - after blowing through a $2M influencer budget last year (learned some expensive lessons there!), I've gotten pretty good at knowing what's actually possible.
+
+Here's the deal:
+* Those 20% engagement rates everyone promises? Yeah... let's be realistic
+* I've tracked over 400 beauty campaigns - I know what numbers make sense
+* Remember that viral skincare campaign last winter? I was behind the numbers
+* Sometimes a micro-influencer outperforms a celebrity - I'll show you why
+
+No fancy algorithms here - just pure experience and real data. I'll tell you what actually works, not what looks good in a pitch deck.""",
+    
+    "optimizer": """Listen, I've survived three TikTok algorithm changes and Gen Z's shift from Instagram to BeReal and back. Here's what I've learned the hard way:
+
+Quick reality check:
+* That perfect influencer mix you planned? Might need to flip it upside down
+* Your content calendar? Let's make it flexible - trends change FAST
+* Budget allocation? I'll show you my 40-40-20 rule that saved my last campaign
+
+I've messed up enough campaigns to know what works now. Had a client blow 50K on the wrong strategy last month - not happening on my watch.
+
+I'm here to help you win, not to make your pitch deck pretty. Cool?"""}
+
+
 # Enhanced influencer data with more detailed metrics
 INFLUENCERS = [
-  {"id": 1, "name": "EcoGlow", "handle": "@ecoglow", "platform": "instagram", 
+  {"id": 1, "name": "AnushkaMehra", "handle": "@anushkamehra1", "platform": "instagram", 
    "followers": 54000, "er": 0.048, "topics": ["skincare","sustainable","cruelty-free"],
    "aud": {"13-17":0.18, "18-24":0.56, "25-34":0.18, "35+":0.08}, 
    "geo": {"US": 0.45, "CA": 0.15, "UK": 0.20, "AU": 0.10, "other": 0.10},
    "safety": "clean", "history": {"reel":0.12,"static":0.04,"story":0.08,"avg_views":8500},
    "fraud_indicators": {"spike_frequency": 0.02, "bot_ratio": 0.05, "repetitive_comments": 0.03}},
   
-  {"id": 2, "name": "DermGenZ", "handle": "@dermgenz", "platform": "instagram",
+  {"id": 2, "name": "VrindaSuri", "handle": "@vrindaaasuri", "platform": "instagram",
    "followers": 88000, "er": 0.041, "topics": ["dermatology","skincare","science"],
    "aud": {"13-17":0.12, "18-24":0.52, "25-34":0.24, "35+":0.12},
    "geo": {"US": 0.50, "CA": 0.12, "UK": 0.18, "AU": 0.08, "other": 0.12},
    "safety": "clean", "history": {"reel":0.10,"static":0.03,"story":0.06,"avg_views":7200},
    "fraud_indicators": {"spike_frequency": 0.01, "bot_ratio": 0.03, "repetitive_comments": 0.02}},
    
-  {"id": 3, "name": "PlanetSkin", "handle": "@planetskin", "platform": "instagram",
+  {"id": 3, "name": "taneesho", "handle": "@taneeshow", "platform": "instagram",
    "followers": 32000, "er": 0.055, "topics": ["eco","skincare","sustainable","zero-waste"],
    "aud": {"13-17":0.20, "18-24":0.58, "25-34":0.15, "35+":0.07},
    "geo": {"US": 0.40, "CA": 0.18, "UK": 0.22, "AU": 0.12, "other": 0.08},
    "safety": "clean", "history": {"reel":0.13,"static":0.05,"story":0.09,"avg_views":6800},
    "fraud_indicators": {"spike_frequency": 0.015, "bot_ratio": 0.04, "repetitive_comments": 0.025}},
    
-  {"id": 4, "name": "GlowNGo", "handle": "@glowngo", "platform": "instagram",
+  {"id": 4, "name": "Taranya Shah", "handle": "@Tarabe", "platform": "instagram",
    "followers": 120000, "er": 0.028, "topics": ["beauty","lifestyle"],
    "aud": {"13-17":0.08, "18-24":0.40, "25-34":0.36, "35+":0.16},
    "geo": {"US": 0.55, "CA": 0.10, "UK": 0.15, "AU": 0.08, "other": 0.12},
    "safety": "minor-flags", "history": {"reel":0.09,"static":0.03,"story":0.05,"avg_views":9200},
    "fraud_indicators": {"spike_frequency": 0.08, "bot_ratio": 0.12, "repetitive_comments": 0.15}},
    
-  {"id": 5, "name": "CleanBeautyBae", "handle": "@cleanbeautybae", "platform": "instagram",
+  {"id": 5, "name": "SanyaFarukh", "handle": "@Yourssanya", "platform": "instagram",
    "followers": 67000, "er": 0.052, "topics": ["clean-beauty","skincare","sustainable"],
    "aud": {"13-17":0.22, "18-24":0.61, "25-34":0.12, "35+":0.05},
    "geo": {"US": 0.42, "CA": 0.16, "UK": 0.19, "AU": 0.11, "other": 0.12},
-   "safety": "clean", "history": {"reel":0.14,"static":0.06,"story":0.10,"avg_views":7800},
+   "safety": "clean", "history": {"reel":0.14,"static":0.06,"story":0.10,"a"
+   "vg_views":7800},
    "fraud_indicators": {"spike_frequency": 0.02, "bot_ratio": 0.04, "repetitive_comments": 0.03}},
    
-  {"id": 6, "name": "SustainableSkinBae", "handle": "@sustskinbae", "platform": "instagram",
+  {"id": 6, "name": "Dr.Aanchal.md", "handle": "@draanchal", "platform": "instagram",
    "followers": 43000, "er": 0.061, "topics": ["sustainable","skincare","eco-friendly","dermatologist-tested"],
    "aud": {"13-17":0.25, "18-24":0.55, "25-34":0.14, "35+":0.06},
    "geo": {"US": 0.38, "CA": 0.20, "UK": 0.24, "AU": 0.10, "other": 0.08},
    "safety": "clean", "history": {"reel":0.15,"static":0.07,"story":0.11,"avg_views":6900},
    "fraud_indicators": {"spike_frequency": 0.01, "bot_ratio": 0.03, "repetitive_comments": 0.02}},
 
-  {"id": 7, "name": "HolisticBeautyDoc", "handle": "@holisticbeautydoc", "platform": "instagram",
+  {"id": 7, "name": "kimaya Jane", "handle": "@kimaya.jane", "platform": "instagram",
    "followers": 92000, "er": 0.039, "topics": ["holistic-beauty","dermatology","natural-skincare","wellness"],
    "aud": {"13-17":0.10, "18-24":0.45, "25-34":0.35, "35+":0.10},
    "geo": {"US": 0.48, "CA": 0.15, "UK": 0.22, "AU": 0.08, "other": 0.07},
    "safety": "clean", "history": {"reel":0.11,"static":0.04,"story":0.08,"avg_views":8800},
    "fraud_indicators": {"spike_frequency": 0.02, "bot_ratio": 0.04, "repetitive_comments": 0.02}},
 
-  {"id": 8, "name": "OrganicGlowGuru", "handle": "@organicglowguru", "platform": "instagram",
-   "followers": 38000, "er": 0.058, "topics": ["organic-beauty","vegan","clean-beauty","mindful-skincare"],
+  {"id": 8, "name": "Nikita Dutta", "handle": "@nikkifying", "platform": "instagram","followers": 38000, "er": 0.058, "topics": ["organic-beauty","vegan","clean-beauty","mindful-skincare"],
    "aud": {"13-17":0.20, "18-24":0.58, "25-34":0.16, "35+":0.06},
    "geo": {"US": 0.40, "CA": 0.18, "UK": 0.25, "AU": 0.12, "other": 0.05},
    "safety": "clean", "history": {"reel":0.14,"static":0.06,"story":0.10,"avg_views":5900},
    "fraud_indicators": {"spike_frequency": 0.01, "bot_ratio": 0.03, "repetitive_comments": 0.02}},
 
-  {"id": 9, "name": "SkinScientist", "handle": "@skinscientist", "platform": "instagram",
+  {"id": 9, "name": "Kush Sachdeva", "handle": "@Kusshsachdeva", "platform": "instagram",
    "followers": 150000, "er": 0.035, "topics": ["skincare-science","clinical-research","evidence-based"],
    "aud": {"13-17":0.05, "18-24":0.35, "25-34":0.45, "35+":0.15},
    "geo": {"US": 0.52, "CA": 0.12, "UK": 0.20, "AU": 0.08, "other": 0.08},
    "safety": "clean", "history": {"reel":0.09,"static":0.04,"story":0.07,"avg_views":11000},
    "fraud_indicators": {"spike_frequency": 0.02, "bot_ratio": 0.04, "repetitive_comments": 0.03}},
 
-  {"id": 10, "name": "ZeroWasteBeauty", "handle": "@zerowaste.beauty", "platform": "instagram",
+  {"id": 10, "name": "Krisha", "handle": "@Krisha.hehe", "platform": "instagram",
    "followers": 29000, "er": 0.067, "topics": ["zero-waste","sustainable","eco-packaging","natural-beauty"],
    "aud": {"13-17":0.22, "18-24":0.60, "25-34":0.13, "35+":0.05},
    "geo": {"US": 0.35, "CA": 0.25, "UK": 0.20, "AU": 0.15, "other": 0.05},
